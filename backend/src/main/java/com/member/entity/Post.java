@@ -1,6 +1,5 @@
 package com.member.entity;
 
-
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -69,7 +68,7 @@ public class Post {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createAt) {
-		this.createdAt = createAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }

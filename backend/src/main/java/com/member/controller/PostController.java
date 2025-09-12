@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import com.member.dto.PostRequest;
 import com.member.entity.Post;
 import com.member.service.PostService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/posts")
@@ -19,7 +23,15 @@ public class PostController {
 
 	// 新增發文
 	@PostMapping("")
-	public ResponseEntity<Post> createPost(@RequestBody PostRequest request) {
+	public ResponseEntity<?> createPost(@RequestBody @Valid PostRequest request, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			String errors = bindingResult.getAllErrors().stream()
+					.map(ObjectError::getDefaultMessage)
+					.reduce((s1, s2) -> s1 + "; " + s2).orElse("參數錯誤");
+			return ResponseEntity.badRequest().body(errors);
+		}
+
 		Post post = postService.createPost(request);
 		return ResponseEntity.ok(post);
 	}

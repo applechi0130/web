@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotBlank;
 public class LoginRequest {
 
     @NotBlank(message = "手機號碼不能為空")
-    private Integer phone;
+    private String phone;
 
     @NotBlank(message = "密碼不能為空")
     private String password;
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

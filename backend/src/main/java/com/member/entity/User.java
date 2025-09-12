@@ -15,7 +15,7 @@ public class User {
 	private Integer userID;
 
 	@Column(nullable = false, unique = true, length = 10)
-	private Integer phone;
+	private String phone;
 
 	@Column(nullable = false, length = 10)
 	private String userName;
@@ -34,12 +34,12 @@ public class User {
 		this.userID = userID;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone2) {
-		this.phone = phone2;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getUserName() {

@@ -1,16 +1,16 @@
 package com.member.dto;
 
 public class RegisterRequest {
-	private Integer phone;
+	private String phone;
 	private String username;
 	private String email;
 	private String password;
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
