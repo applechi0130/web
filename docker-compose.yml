@@ -9,4 +9,4 @@ services:
     volumes:
       - /d/web/建立表格.sql:/docker-entrypoint-initdb.d/建立表格.sql
     ports:
-      - "3306:3306"
+      - "3310:3306"

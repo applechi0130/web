@@ -1,5 +1,6 @@
 package com.member.exception;
 
+// 自定義異常類（建構子、欄位、方法）
 // 繼承 RuntimeException，表示此異常為非檢查型異常
 public class CustomException extends RuntimeException {
 
