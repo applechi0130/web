@@ -1,0 +1,49 @@
+/* 表單用 CSS Grid 排版 */
+#searchForm {
+  display: grid; /* 使用 CSS Grid 佈局 */
+  grid-template-columns: 1fr 2fr;  /* 左邊標籤1份，右邊輸入框2份 */
+  gap: 20px; /* 行距與列距20px */
+  padding: 20px; /* 內距20px */
+  background-color: #f7f9fc; /* 淺灰背景 */
+  border: 1px solid #dfe3e8; /* 灰色邊框 */
+  border-radius: 10px; /* 圓角 */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 淡淡陰影 */
+  max-width: 600px; /* 最大寬度600px */
+  margin: auto; /* 水平置中 */
+}
+
+/* 表單內輸入框與選單樣式 */
+#searchForm input,
+#searchForm select {
+  padding: 8px; /* 上下內距8px，左右內距自動 */
+  width: 80%; /* 寬度 */
+  border: 1px solid #cbd5e0; /* 灰色邊框 */
+  border-radius: 6px; /* 圓角 */
+  background-color: #fff; /* 白色背景 */
+}
+
+/* 表單送出按鈕 */
+#searchForm button {
+  grid-column: span 2; /* 跨兩欄 */
+  padding: 12px; /* 上下內距12px，左右內距自動 */
+  font-size: 16px;
+  color: #fff;
+  background-color: #5a67d8;
+  border: none;   /* 無邊框 */
+  border-radius: 6px; /* 圓角 */
+  cursor: pointer; /* 滑鼠變手指 */
+}
+
+/* 按鈕懸浮 */
+#searchForm button:hover {
+  background-color: #4c51bf; /* 深藍色 */
+}
+
+/* 表單標籤 */
+#searchForm label {
+  font-weight: 500; /* 中等粗細 */
+  color: #333; /* 深灰色 */
+  position: relative; /* 相對定位 */
+  align-self: center; /* 垂直置中 */
+  text-align: left; /* 所有標籤靠左對齊 */
+}

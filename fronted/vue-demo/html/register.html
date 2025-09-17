@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>會員註冊範例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        margin-top: 1rem;
+      }
+      input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.3rem;
+        box-sizing: border-box;
+      }
+      button {
+        margin-top: 1rem;
+        padding: 0.6rem;
+        width: 100%;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+      .message {
+        max-width: 600px;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../css/Register.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h2>註冊</h2>
+      <form id="searchForm" @submit.prevent="onRegister">
+        <label for="phone">電話：</label>
+        <input id="phone" v-model="phone" type="text" required maxlength="10" />
+
+        <label for="userName">使用者名稱：</label>
+        <input
+          id="userName"
+          v-model="userName"
+          type="text"
+          required
+          maxlength="10"
+        />
+
+        <label for="email">Email：</label>
+        <input id="email" v-model="email" type="email" required />
+
+        <label for="password">密碼：</label>
+        <input id="password" v-model="password" type="password" required />
+
+        <label for="confirmPassword">確認密碼：</label>
+        <input
+          id="confirmPassword"
+          v-model="confirmPassword"
+          type="password"
+          required
+        />
+
+        <button type="submit">註冊</button>
+      </form>
+
+      <div
+        :class="['message', errorMsg ? 'error' : '', successMsg ? 'success' : '']"
+        v-if="errorMsg || successMsg"
+      >
+        {{ errorMsg || successMsg }}
+      </div>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          const phone = ref("");
+          const userName = ref("");
+          const email = ref("");
+          const password = ref("");
+          const confirmPassword = ref("");
+          const errorMsg = ref("");
+          const successMsg = ref("");
+
+          const onRegister = async () => {
+            errorMsg.value = "";
+            successMsg.value = "";
+
+            if (password.value !== confirmPassword.value) {
+              errorMsg.value = "密碼與確認密碼不相符";
+              return;
+            }
+
+            try {
+              await axios.post("http://localhost:8080/register", {
+                phone: phone.value,
+                userName: userName.value,
+                email: email.value,
+                password: password.value,
+              });
+              successMsg.value = "註冊成功";
+              phone.value = "";
+              userName.value = "";
+              email.value = "";
+              password.value = "";
+              confirmPassword.value = "";
+            } catch (err) {
+              errorMsg.value = err.response?.data || "註冊失敗";
+            }
+          };
+
+          return {
+            phone,
+            userName,
+            email,
+            password,
+            confirmPassword,
+            errorMsg,
+            successMsg,
+            onRegister,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
